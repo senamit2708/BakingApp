@@ -1,0 +1,28 @@
+@ToDo
+
+@ToDo 1:  CardView to be implemented for the first layout
+
+@ToDo1.1: create a layout for the CardView
+@ToDo 1.2: Create an Activity :- MainActivity
+@ToDo 1.3: MainActivity layout conatins the recyclerview which conatins a cardView Layout inside it.
+@ToDo 1.4: RecyclerView inside the main Activity
+@ToDo 1.5: implements the LoaderManager.LoaderCallBack
+@ToDo 1.6: Do in background loader class
+@ToDo 1.7: create a Util class
+@ToDo 1.8 Create an Adapter class
+
+
+
+@ToDo1.1: create a layout for the CardView:
+
+1.1.1
+
+@ToD0 2:   Adding  Fragment to the Activity
+Links followed:
+https://developer.android.com/guide/components/fragments.html
+https://developer.android.com/reference/android/app/Fragment.html
+https://developer.android.com/training/basics/fragments/index.html
+demo app of google newspaper
+
+
+
