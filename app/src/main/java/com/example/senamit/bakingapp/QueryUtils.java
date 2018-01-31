@@ -109,6 +109,7 @@ public class QueryUtils {
             recipeName=jsonObject.optString("name");
             recipeImage = jsonObject.optString("image");
             recipeId = jsonObject.optInt("id");
+            Log.i(LOG_TAG, "the recipe id is "+recipeId);
 
             if (TextUtils.isEmpty(recipeImage)){
                 bakingItems.add(new BakingItems(recipeName, "no Image", recipeId));
@@ -130,4 +131,66 @@ public class QueryUtils {
         bakingItems = extractFeatureJSONReceipeName(jsonResponse);
         return bakingItems;
     }
+
+    public static ArrayList<BakingItems> extractFeatureJSONReceipeSteps(String jsonResponse, int recipeId) throws JSONException {
+
+        if (TextUtils.isEmpty(jsonResponse)){
+            return null;
+        }
+        String ingredient;
+        int quantity;
+        String measure;
+        int arrayIndex=recipeId-1;
+//        String stepShortDescription;
+//        int stepId;
+
+
+
+
+        JSONArray baseJsonArray = null;
+        ArrayList<BakingItems> bakingItems = new ArrayList<>();
+        baseJsonArray = new JSONArray(jsonResponse);
+
+
+            JSONObject jsonObject = baseJsonArray.optJSONObject(arrayIndex);
+            JSONArray jsonIngredientArray = jsonObject.optJSONArray("ingredients");
+            Log.i(LOG_TAG, "the size of ingredients are "+jsonIngredientArray.length());
+            for (int i=0; i<jsonIngredientArray.length();i++){
+                JSONObject jsonIngredientObject = jsonIngredientArray.optJSONObject(i);
+                quantity = jsonIngredientObject.optInt("quantity");
+                measure = jsonIngredientObject.optString("measure");
+                ingredient = jsonIngredientObject.optString("ingredient");
+
+                Log.i(LOG_TAG, "the ingredients are "+ ingredient);
+                bakingItems.add(new BakingItems(ingredient, quantity, measure));
+
+            }
+//            JSONArray jsonStepArray = jsonObject.optJSONArray("steps");
+//        for (int i=0; i< jsonStepArray.length(); i++){
+//            JSONObject jsonStepObject = jsonStepArray.optJSONObject(i);
+//            stepShortDescription = jsonStepObject.optString("shortDescription");
+//            stepId = jsonStepObject.optInt("id");
+//
+//            Log.i(LOG_TAG, "the short description "+stepShortDescription);
+//            bakingItems.add(new BakingItems(stepShortDescription, stepId));
+//        }
+
+
+        return bakingItems;
+
+    }
+
+    public static ArrayList<BakingItems> fetchRecipeStep(String stringUrl, int recipeId) throws IOException, JSONException {
+
+        Log.i(LOG_TAG, "the fetchRecipename 1");
+        URL url = createUrl(stringUrl);
+        Log.i(LOG_TAG, "the url is2   " + url);
+        String jsonResponse = null;
+        jsonResponse = makeHttpRequest(url);
+        Log.i(LOG_TAG, "the jsonresponse i got");
+        bakingItems = extractFeatureJSONReceipeSteps(jsonResponse,recipeId);
+        return bakingItems;
+
+    }
+
 }

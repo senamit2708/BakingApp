@@ -25,6 +25,7 @@ public class BakingRecipeStep extends AppCompatActivity {
         Log.i(LOG_TAG, "the receipe is id is  "+ recipeId);
 
         FragmentRecipeSteps fragmentRecipeSteps = new FragmentRecipeSteps();
+        fragmentRecipeSteps.setRecipeId(recipeId);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.frame_receipe_step_container, fragmentRecipeSteps).commit();

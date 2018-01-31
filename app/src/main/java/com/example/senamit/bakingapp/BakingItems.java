@@ -11,6 +11,10 @@ public class BakingItems {
     private String recipeName;
     private String recipeImage;
     private int recipeId;
+    String ingredient;
+    int quantity;
+    String measure;
+
 
     public BakingItems(String recipeName, String recipeImage) {
         this.recipeName = recipeName;
@@ -23,6 +27,12 @@ public class BakingItems {
         this.recipeId = recipeId;
     }
 
+    public BakingItems(String ingredient, int quantity, String measure) {
+        this.ingredient = ingredient;
+        this.quantity = quantity;
+        this.measure = measure;
+    }
+
     public String getRecipeName() {
         return recipeName;
     }
@@ -33,5 +43,17 @@ public class BakingItems {
 
     public int getRecipeId() {
         return recipeId;
+    }
+
+    public String getIngredient() {
+        return ingredient;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getMeasure() {
+        return measure;
     }
 }
