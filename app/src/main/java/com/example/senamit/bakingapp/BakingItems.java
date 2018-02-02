@@ -14,6 +14,8 @@ public class BakingItems {
     String ingredient;
     int quantity;
     String measure;
+    String shortDiscription;
+    int stepId;
 
 
     public BakingItems(String recipeName, String recipeImage) {
@@ -31,6 +33,11 @@ public class BakingItems {
         this.ingredient = ingredient;
         this.quantity = quantity;
         this.measure = measure;
+    }
+
+    public BakingItems(String shortDiscription, int stepId) {
+        this.shortDiscription = shortDiscription;
+        this.stepId = stepId;
     }
 
     public String getRecipeName() {
@@ -55,5 +62,13 @@ public class BakingItems {
 
     public String getMeasure() {
         return measure;
+    }
+
+    public String getShortDiscription() {
+        return shortDiscription;
+    }
+
+    public int getStepId() {
+        return stepId;
     }
 }

@@ -132,7 +132,7 @@ public class QueryUtils {
         return bakingItems;
     }
 
-    public static ArrayList<BakingItems> extractFeatureJSONReceipeSteps(String jsonResponse, int recipeId) throws JSONException {
+    public static ArrayList<BakingItems> extractFeatureJSONReceipeIngredient(String jsonResponse, int recipeId) throws JSONException {
 
         if (TextUtils.isEmpty(jsonResponse)){
             return null;
@@ -141,16 +141,10 @@ public class QueryUtils {
         int quantity;
         String measure;
         int arrayIndex=recipeId-1;
-//        String stepShortDescription;
-//        int stepId;
-
-
-
 
         JSONArray baseJsonArray = null;
         ArrayList<BakingItems> bakingItems = new ArrayList<>();
         baseJsonArray = new JSONArray(jsonResponse);
-
 
             JSONObject jsonObject = baseJsonArray.optJSONObject(arrayIndex);
             JSONArray jsonIngredientArray = jsonObject.optJSONArray("ingredients");
@@ -165,15 +159,51 @@ public class QueryUtils {
                 bakingItems.add(new BakingItems(ingredient, quantity, measure));
 
             }
-//            JSONArray jsonStepArray = jsonObject.optJSONArray("steps");
-//        for (int i=0; i< jsonStepArray.length(); i++){
-//            JSONObject jsonStepObject = jsonStepArray.optJSONObject(i);
-//            stepShortDescription = jsonStepObject.optString("shortDescription");
-//            stepId = jsonStepObject.optInt("id");
-//
-//            Log.i(LOG_TAG, "the short description "+stepShortDescription);
-//            bakingItems.add(new BakingItems(stepShortDescription, stepId));
-//        }
+
+        return bakingItems;
+
+    }
+
+    public static ArrayList<BakingItems> fetchRecipeIngredient(String stringUrl, int recipeId) throws IOException, JSONException {
+
+        Log.i(LOG_TAG, "the fetchRecipename 1");
+        URL url = createUrl(stringUrl);
+        Log.i(LOG_TAG, "the url is2   " + url);
+        String jsonResponse = null;
+        jsonResponse = makeHttpRequest(url);
+        Log.i(LOG_TAG, "the jsonresponse i got");
+        bakingItems = extractFeatureJSONReceipeIngredient(jsonResponse,recipeId);
+        return bakingItems;
+
+    }
+
+    public static ArrayList<BakingItems> extractFeatureJSONReceipeSteps(String jsonResponse, int recipeId) throws JSONException {
+
+        if (TextUtils.isEmpty(jsonResponse)){
+            return null;
+        }
+
+        int arrayIndex=recipeId-1;
+        String stepShortDescription;
+        int stepId;
+
+        JSONArray baseJsonArray = null;
+        ArrayList<BakingItems> bakingItems = new ArrayList<>();
+        baseJsonArray = new JSONArray(jsonResponse);
+
+        JSONObject jsonObject = baseJsonArray.optJSONObject(arrayIndex);
+        JSONArray jsonIngredientArray = jsonObject.optJSONArray("ingredients");
+        Log.i(LOG_TAG, "the size of ingredients are "+jsonIngredientArray.length());
+
+            JSONArray jsonStepArray = jsonObject.optJSONArray("steps");
+        for (int i=0; i< jsonStepArray.length(); i++){
+            JSONObject jsonStepObject = jsonStepArray.optJSONObject(i);
+            stepShortDescription = jsonStepObject.optString("shortDescription");
+            stepId = jsonStepObject.optInt("id");
+
+            Log.i(LOG_TAG, "the short description "+stepShortDescription);
+            bakingItems.add(new BakingItems(stepShortDescription, stepId));
+        }
 
 
         return bakingItems;

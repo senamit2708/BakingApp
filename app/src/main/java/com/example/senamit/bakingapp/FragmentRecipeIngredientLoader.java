@@ -2,7 +2,6 @@ package com.example.senamit.bakingapp;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
 
 import org.json.JSONException;
 
@@ -10,23 +9,16 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by senamit on 31/1/18.
+ * Created by senamit on 1/2/18.
  */
 
-public class fragmentRecipeStepLoader extends AsyncTaskLoader {
-
-    private static final String LOG_TAG = fragmentRecipeStepLoader.class.getSimpleName();
+public class FragmentRecipeIngredientLoader extends AsyncTaskLoader {
 
     List<BakingItems> bakingItems;
     int recipeId;
     String stringUrl;
 
-    public fragmentRecipeStepLoader(Context context, String stringUrl) {
-        super(context);
-        this.stringUrl = stringUrl;
-    }
-
-    public fragmentRecipeStepLoader(Context context, String stringUrl, int recipeId) {
+    public FragmentRecipeIngredientLoader(Context context, int recipeId, String stringUrl) {
         super(context);
         this.recipeId = recipeId;
         this.stringUrl = stringUrl;
@@ -46,23 +38,13 @@ public class fragmentRecipeStepLoader extends AsyncTaskLoader {
 
     @Override
     public Object loadInBackground() {
-//        return null;
-        if (stringUrl==null){
-            return null;
-        }
         try {
-            Log.i(LOG_TAG, "inside the load in backgroound");
-            bakingItems = QueryUtils.fetchRecipeStep(stringUrl, recipeId);
+            bakingItems = QueryUtils.fetchRecipeIngredient(stringUrl, recipeId);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         return bakingItems;
-
-
-
     }
 }

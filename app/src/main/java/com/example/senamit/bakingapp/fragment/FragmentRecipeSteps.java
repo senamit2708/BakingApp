@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,8 @@ import android.widget.TextView;
 
 import com.example.senamit.bakingapp.BakingItems;
 import com.example.senamit.bakingapp.BakingRecipeNameLoader;
+import com.example.senamit.bakingapp.BakingRecipeStepAdapter;
+import com.example.senamit.bakingapp.FragmentRecipeIngredientLoader;
 import com.example.senamit.bakingapp.R;
 import com.example.senamit.bakingapp.fragmentRecipeStepLoader;
 
@@ -23,12 +28,16 @@ import java.util.List;
  * Created by senamit on 31/1/18.
  */
 
-public class FragmentRecipeSteps extends Fragment implements LoaderManager.LoaderCallbacks<List<BakingItems>>{
+public class FragmentRecipeSteps extends Fragment {
 
     public static final String LOG_TAG = FragmentRecipeSteps.class.getSimpleName();
-    Context context;
-    TextView txtRecipeIngredient;
+ Context context;
+  TextView txtRecipeIngredient;
+  TextView txtRecipeStep;
     int recipeId;
+    private RecyclerView recyclerRecipeStep;
+    private RecyclerView.LayoutManager mLayoutManager;
+    BakingRecipeStepAdapter bakingRecipeStepAdapter;
     String stringUrl = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
 
@@ -49,33 +58,94 @@ public class FragmentRecipeSteps extends Fragment implements LoaderManager.Loade
         View rootView = inflater.inflate(R.layout.fragment_recipe_step, container, false);
         context=container.getContext();
          txtRecipeIngredient = (TextView)rootView.findViewById(R.id.txt_recipe_ingredients);
-        getLoaderManager().initLoader(1, savedInstanceState, this);
+         txtRecipeStep=(TextView)rootView.findViewById(R.id.txt_recipe_Step);
+         recyclerRecipeStep = rootView.findViewById(R.id.recyclerRecipeStep);
+        mLayoutManager = new LinearLayoutManager(context);
+        recyclerRecipeStep.setLayoutManager(mLayoutManager);
+
+         RecipeStepClass recipeStepClass = new RecipeStepClass();
+         recipeStepClass.loadercall();
+
+         RecipeIngredientClass recipeIngredientClass = new RecipeIngredientClass();
+         recipeIngredientClass.loadercall();
+
+
 
         return  rootView;
     }
 
-    @Override
-    public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
-        Log.i(LOG_TAG,"inside the init loader");
-        return new fragmentRecipeStepLoader(context,stringUrl, recipeId );
-    }
 
-    @Override
-    public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
-
-        String ingredient = data.get(0).getIngredient();
-        Log.i(LOG_TAG, "inside the onloadfinished method "+ingredient);
-        txtRecipeIngredient.setText(ingredient);
-
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<BakingItems>> loader) {
-
-    }
 
     public void setRecipeId(int recipeId) {
         this.recipeId = recipeId;
+    }
+
+    public  class RecipeStepClass implements LoaderManager.LoaderCallbacks<List<BakingItems>>{
+        @Override
+        public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
+            Log.i(LOG_TAG,"inside the init loader");
+            return new fragmentRecipeStepLoader(context,stringUrl, recipeId );
+        }
+
+        @Override
+        public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
+            String ingredient = data.get(1).getIngredient();
+//            Log.i(LOG_TAG, "inside the onloadfinished method "+ingredient);
+//            txtRecipeIngredient.setText(ingredient);
+           Log.i(LOG_TAG, "inside onloadfinishedmethod of fragment "+ingredient);
+            bakingRecipeStepAdapter = new BakingRecipeStepAdapter(data);
+            recyclerRecipeStep.setAdapter(bakingRecipeStepAdapter);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<List<BakingItems>> loader) {
+
+        }
+
+        public  void loadercall() {
+            Log.i(LOG_TAG, "inside the inner class");
+            getLoaderManager().initLoader(1, null, this);
+
+        }
+    }
+
+    public class RecipeIngredientClass implements LoaderManager.LoaderCallbacks<List<BakingItems>>{
+
+        @Override
+        public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
+            return new FragmentRecipeIngredientLoader(context, recipeId,stringUrl );
+        }
+
+        @Override
+        public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
+
+            String ingredient;
+            int quantity;
+            String measure;
+            String displayIngredient = null;
+
+            for (int i=0; i<data.size();i++){
+                ingredient = data.get(i).getIngredient();
+                quantity = data.get(i).getQuantity();
+                measure = data.get(i).getMeasure();
+
+                displayIngredient= quantity +", "+measure+", "+ingredient;
+
+            }
+            txtRecipeIngredient.setText(displayIngredient);
+
+
+        }
+
+        @Override
+        public void onLoaderReset(Loader<List<BakingItems>> loader) {
+
+        }
+
+        public  void loadercall() {
+            Log.i(LOG_TAG, "inside the inner class");
+            getLoaderManager().initLoader(2, null, this);
+
+        }
     }
 }
