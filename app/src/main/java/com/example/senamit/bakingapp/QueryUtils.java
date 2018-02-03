@@ -185,7 +185,12 @@ public class QueryUtils {
 
         int arrayIndex=recipeId-1;
         String stepShortDescription;
+        String description;
+
+        String thumbnailURL = null;
         int stepId;
+        String videoURL;
+
 
         JSONArray baseJsonArray = null;
         ArrayList<BakingItems> bakingItems = new ArrayList<>();
@@ -200,9 +205,12 @@ public class QueryUtils {
             JSONObject jsonStepObject = jsonStepArray.optJSONObject(i);
             stepShortDescription = jsonStepObject.optString("shortDescription");
             stepId = jsonStepObject.optInt("id");
+            description = jsonStepObject.optString("description");
+             videoURL = jsonStepObject.optString("videoURL");
+            thumbnailURL=jsonStepObject.optString("thumbnailURL");
 
             Log.i(LOG_TAG, "the short description "+stepShortDescription);
-            bakingItems.add(new BakingItems(stepShortDescription, stepId));
+            bakingItems.add(new BakingItems(stepShortDescription, stepId, description, thumbnailURL, videoURL));
         }
 
 

@@ -16,6 +16,9 @@ public class BakingItems {
     String measure;
     String shortDiscription;
     int stepId;
+    String description;
+    String thumbnailURL;
+    String videoURL;
 
 
     public BakingItems(String recipeName, String recipeImage) {
@@ -38,6 +41,14 @@ public class BakingItems {
     public BakingItems(String shortDiscription, int stepId) {
         this.shortDiscription = shortDiscription;
         this.stepId = stepId;
+    }
+
+    public BakingItems(String shortDiscription, int stepId, String description, String thumbnailURL, String videoURL) {
+        this.shortDiscription = shortDiscription;
+        this.stepId = stepId;
+        this.description = description;
+        this.thumbnailURL = thumbnailURL;
+        this.videoURL = videoURL;
     }
 
     public String getRecipeName() {

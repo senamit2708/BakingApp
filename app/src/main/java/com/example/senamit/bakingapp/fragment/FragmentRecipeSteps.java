@@ -1,6 +1,7 @@
 package com.example.senamit.bakingapp.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.example.senamit.bakingapp.BakingItems;
 import com.example.senamit.bakingapp.BakingRecipeNameLoader;
 import com.example.senamit.bakingapp.BakingRecipeStepAdapter;
+import com.example.senamit.bakingapp.BakingStepDescription;
 import com.example.senamit.bakingapp.FragmentRecipeIngredientLoader;
 import com.example.senamit.bakingapp.R;
 import com.example.senamit.bakingapp.fragmentRecipeStepLoader;
@@ -75,25 +77,21 @@ public class FragmentRecipeSteps extends Fragment {
     }
 
 
-
     public void setRecipeId(int recipeId) {
         this.recipeId = recipeId;
     }
 
-    public  class RecipeStepClass implements LoaderManager.LoaderCallbacks<List<BakingItems>>{
+    public  class RecipeStepClass implements LoaderManager.LoaderCallbacks<List<BakingItems>>, BakingRecipeStepAdapter.ListItemStepClickListener{
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
-            Log.i(LOG_TAG,"inside the init loader");
+
             return new fragmentRecipeStepLoader(context,stringUrl, recipeId );
         }
 
         @Override
         public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
-            String ingredient = data.get(1).getIngredient();
-//            Log.i(LOG_TAG, "inside the onloadfinished method "+ingredient);
-//            txtRecipeIngredient.setText(ingredient);
-           Log.i(LOG_TAG, "inside onloadfinishedmethod of fragment "+ingredient);
-            bakingRecipeStepAdapter = new BakingRecipeStepAdapter(data);
+
+            bakingRecipeStepAdapter = new BakingRecipeStepAdapter(data, this);
             recyclerRecipeStep.setAdapter(bakingRecipeStepAdapter);
         }
 
@@ -103,8 +101,16 @@ public class FragmentRecipeSteps extends Fragment {
         }
 
         public  void loadercall() {
-            Log.i(LOG_TAG, "inside the inner class");
             getLoaderManager().initLoader(1, null, this);
+
+        }
+
+        @Override
+        public void onListItemStepClick(int clickItemIndex, BakingItems bakingItems) {
+
+            Log.i(LOG_TAG, "inside the onlisteitemstepclick mehtod  "+clickItemIndex);
+//            Intent intent1 = new Intent(FragmentRecipeSteps.this,BakingStepDescription.class);
+
 
         }
     }

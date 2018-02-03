@@ -14,11 +14,17 @@ import java.util.List;
  * Created by senamit on 2/2/18.
  */
 
-public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeStepAdapter.ViewHolder> {
+public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeStepAdapter.ViewHolder>{
 
     Context context;
     List<BakingItems> bakingItems;
+    ListItemStepClickListener listItemStepClickListener;
     public static final String LOG_TAG = BakingRecipeStepAdapter.class.getSimpleName();
+
+    public BakingRecipeStepAdapter(List<BakingItems> bakingItems, ListItemStepClickListener listItemStepClickListener) {
+        this.bakingItems = bakingItems;
+        this.listItemStepClickListener = listItemStepClickListener;
+    }
 
     public BakingRecipeStepAdapter(List<BakingItems> bakingItems) {
         Log.i(LOG_TAG, "inside the constructor of step adapter");
@@ -49,13 +55,26 @@ public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeSt
         return bakingItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView txtRecipeStepShortDescription;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             txtRecipeStepShortDescription = itemView.findViewById(R.id.txt_recipe_step_shortDescription);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.i(LOG_TAG, "inside the onclick of viewholder");
+            int clickItemPosition = getAdapterPosition();
+            listItemStepClickListener.onListItemStepClick(clickItemPosition, bakingItems.get(clickItemPosition));
         }
     }
+
+    public interface ListItemStepClickListener{
+        void onListItemStepClick(int clickItemIndex, BakingItems bakingItems);
+    }
+
 }
