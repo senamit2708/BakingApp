@@ -18,6 +18,7 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
     FragmentTransaction transaction;
     FragmentRecipeSteps fragmentRecipeSteps;
     FragmentRecipeBakingProcess fragmentRecipeBakingProcess;
+    String KEY_RECIPE_STEP_PROCESS="keyBakingProcess";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,11 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
 
     @Override
     public void stepNumberSelected(int clickItemIndex, BakingItems bakingItems) {
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.frame_receipe_step_container, fragmentRecipeBakingProcess);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
 
         Intent intent = new Intent(BakingRecipeStep.this, BakingStepDescription.class);
-        intent.putExtra("key1",clickItemIndex);
+//        intent.putExtra("key1",clickItemIndex);
+//        Log.i(LOG_TAG, "the value os clidkItemIndex is "+clickItemIndex);
+        intent.putExtra(KEY_RECIPE_STEP_PROCESS, bakingItems);
         startActivity(intent);
 
 

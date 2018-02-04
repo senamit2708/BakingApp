@@ -21,7 +21,8 @@ public class FragmentRecipeBakingProcess extends Fragment{
     private static final String LOG_TAG = FragmentRecipeBakingProcess.class.getSimpleName();
     Context context;
     TextView text2;
-    int clickItemIndex;
+    String clickItemIndex;
+
 
 
     public FragmentRecipeBakingProcess() {
@@ -32,17 +33,14 @@ public class FragmentRecipeBakingProcess extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_baking_process, container, false);
         text2= rootView.findViewById(R.id.text2);
-        Log.i(LOG_TAG, "the clickeditem index is "+clickItemIndex);
 
-        text2.setText(Integer.toString(clickItemIndex));
+        text2.setText(clickItemIndex);
 
         return  rootView;
     }
 
 
-    public void setClickItemIndex(int clickItemIndex) {
+    public void setClickItemIndex(String clickItemIndex) {
         this.clickItemIndex = clickItemIndex;
-        Log.i(LOG_TAG, "the clickeditem index setClickItemIndex is "+clickItemIndex);
-
     }
 }

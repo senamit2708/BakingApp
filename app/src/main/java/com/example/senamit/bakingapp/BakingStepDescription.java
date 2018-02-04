@@ -10,6 +10,10 @@ import com.example.senamit.bakingapp.fragment.FragmentRecipeBakingProcess;
 
 public class BakingStepDescription extends AppCompatActivity {
 
+    private Bundle bundle;
+    private BakingItems bakingItems;
+    String KEY_RECIPE_STEP_PROCESS="keyBakingProcess";
+
     public static final String LOG_TAG = BakingStepDescription.class.getSimpleName();
     FrameLayout frameLayoutBakingStepInstruction;
     FragmentRecipeBakingProcess fragmentRecipeBakingProcess;
@@ -20,14 +24,13 @@ public class BakingStepDescription extends AppCompatActivity {
         setContentView(R.layout.activity_baking_step_description);
 
         Intent intent = getIntent();
-        int clickItemIndex = intent.getIntExtra("key", 20);
-
-        Log.i(LOG_TAG, "inside the baking step description class");
+       bundle = intent.getExtras();
+       bakingItems = bundle.getParcelable(KEY_RECIPE_STEP_PROCESS);
 
         frameLayoutBakingStepInstruction = findViewById(R.id.frameLayoutRecipeStepInstruction);
 
          fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
-         fragmentRecipeBakingProcess.setClickItemIndex(clickItemIndex);
+         fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.getDescription());
 
         getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();
 
