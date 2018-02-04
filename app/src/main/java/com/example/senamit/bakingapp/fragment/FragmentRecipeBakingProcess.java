@@ -34,13 +34,21 @@ public class FragmentRecipeBakingProcess extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_recipe_baking_process, container, false);
         text2= rootView.findViewById(R.id.text2);
 
-        text2.setText(clickItemIndex);
+        Log.i(LOG_TAG, "inside the oncreate mehtod "+clickItemIndex);
+
 
         return  rootView;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.i(LOG_TAG, "inisde on activity create "+clickItemIndex);
+        text2.setText(clickItemIndex);
+    }
 
     public void setClickItemIndex(String clickItemIndex) {
         this.clickItemIndex = clickItemIndex;
+        Log.i(LOG_TAG, "the clickitemindext is "+this.clickItemIndex);
     }
 }
