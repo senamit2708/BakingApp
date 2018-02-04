@@ -1,13 +1,11 @@
 package com.example.senamit.bakingapp.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,9 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.senamit.bakingapp.BakingItems;
-import com.example.senamit.bakingapp.BakingRecipeNameLoader;
 import com.example.senamit.bakingapp.BakingRecipeStepAdapter;
-import com.example.senamit.bakingapp.BakingStepDescription;
 import com.example.senamit.bakingapp.FragmentRecipeIngredientLoader;
 import com.example.senamit.bakingapp.R;
 import com.example.senamit.bakingapp.fragmentRecipeStepLoader;
@@ -121,7 +117,7 @@ public class FragmentRecipeSteps extends Fragment {
         }
 
         @Override
-        public void onListItemStepClick(int clickItemIndex, BakingItems bakingItems) {
+        public void onListItemStepClick(int clickItemIndex, List<BakingItems> bakingItems) {
 
             Log.i(LOG_TAG, "inside the onlisteitemstepclick mehtod  "+clickItemIndex);
             stepSelectedListener.stepNumberSelected(clickItemIndex, bakingItems);
@@ -170,7 +166,7 @@ public class FragmentRecipeSteps extends Fragment {
     }
 
     public interface StepSelectedListener{
-         void stepNumberSelected(int clickItemIndex, BakingItems bakingItems);
+         void stepNumberSelected(int clickItemIndex, List<BakingItems> bakingItems);
     }
 
 }

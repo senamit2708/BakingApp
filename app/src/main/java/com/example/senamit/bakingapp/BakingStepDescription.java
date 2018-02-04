@@ -8,10 +8,13 @@ import android.widget.FrameLayout;
 
 import com.example.senamit.bakingapp.fragment.FragmentRecipeBakingProcess;
 
+import java.util.List;
+
 public class BakingStepDescription extends AppCompatActivity {
 
     private Bundle bundle;
-    private BakingItems bakingItems;
+//    private BakingItems bakingItems;
+    private List<BakingItems> bakingItems;
     String KEY_RECIPE_STEP_PROCESS="keyBakingProcess";
 
     public static final String LOG_TAG = BakingStepDescription.class.getSimpleName();
@@ -25,12 +28,13 @@ public class BakingStepDescription extends AppCompatActivity {
 
         Intent intent = getIntent();
        bundle = intent.getExtras();
-       bakingItems = bundle.getParcelable(KEY_RECIPE_STEP_PROCESS);
+       bakingItems = bundle.getParcelableArrayList(KEY_RECIPE_STEP_PROCESS);
+       int clikedItemIndex = bundle.getInt("key2", 20);
 
-        frameLayoutBakingStepInstruction = findViewById(R.id.frameLayoutRecipeStepInstruction);
+     frameLayoutBakingStepInstruction = findViewById(R.id.frameLayoutRecipeStepInstruction);
 
          fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
-         fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.getDescription());
+         fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription());
 
         getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();
 

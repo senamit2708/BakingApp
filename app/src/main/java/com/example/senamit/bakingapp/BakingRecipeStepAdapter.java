@@ -69,12 +69,12 @@ public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeSt
         public void onClick(View v) {
             Log.i(LOG_TAG, "inside the onclick of viewholder");
             int clickItemPosition = getAdapterPosition();
-            listItemStepClickListener.onListItemStepClick(clickItemPosition, bakingItems.get(clickItemPosition));
+            listItemStepClickListener.onListItemStepClick(clickItemPosition, bakingItems);
         }
     }
 
     public interface ListItemStepClickListener{
-        void onListItemStepClick(int clickItemIndex, BakingItems bakingItems);
+        void onListItemStepClick(int clickItemIndex, List<BakingItems> bakingItems);
     }
 
 }

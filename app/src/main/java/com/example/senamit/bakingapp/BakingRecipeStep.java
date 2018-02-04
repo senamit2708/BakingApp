@@ -10,6 +10,9 @@ import android.util.Log;
 import com.example.senamit.bakingapp.fragment.FragmentRecipeBakingProcess;
 import com.example.senamit.bakingapp.fragment.FragmentRecipeSteps;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BakingRecipeStep extends AppCompatActivity implements FragmentRecipeSteps.StepSelectedListener{
 
     int recipeId;
@@ -42,12 +45,13 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
     }
 
     @Override
-    public void stepNumberSelected(int clickItemIndex, BakingItems bakingItems) {
+    public void stepNumberSelected(int clickItemIndex, List<BakingItems> bakingItems) {
 
         Intent intent = new Intent(BakingRecipeStep.this, BakingStepDescription.class);
-//        intent.putExtra("key1",clickItemIndex);
-//        Log.i(LOG_TAG, "the value os clidkItemIndex is "+clickItemIndex);
-        intent.putExtra(KEY_RECIPE_STEP_PROCESS, bakingItems);
+        ArrayList<BakingItems> bakingItemsArrayList;
+        bakingItemsArrayList = (ArrayList<BakingItems>) bakingItems;
+        intent.putParcelableArrayListExtra(KEY_RECIPE_STEP_PROCESS, bakingItemsArrayList);
+        intent.putExtra("key2", clickItemIndex);
         startActivity(intent);
 
 
