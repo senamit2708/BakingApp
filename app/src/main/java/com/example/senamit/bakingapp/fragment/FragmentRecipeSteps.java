@@ -42,6 +42,7 @@ public class FragmentRecipeSteps extends Fragment {
     BakingRecipeStepAdapter bakingRecipeStepAdapter;
     String stringUrl = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
+    StepSelectedListener stepSelectedListener;
 
     public FragmentRecipeSteps() {
     }
@@ -50,6 +51,18 @@ public class FragmentRecipeSteps extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            stepSelectedListener = (StepSelectedListener)context;
+        }
+        catch (Exception e){
+            Log.i(LOG_TAG, "the interface is not attached to the acitiviyt");
+        }
 
     }
 
@@ -82,6 +95,8 @@ public class FragmentRecipeSteps extends Fragment {
     }
 
     public  class RecipeStepClass implements LoaderManager.LoaderCallbacks<List<BakingItems>>, BakingRecipeStepAdapter.ListItemStepClickListener{
+
+
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
 
@@ -109,8 +124,7 @@ public class FragmentRecipeSteps extends Fragment {
         public void onListItemStepClick(int clickItemIndex, BakingItems bakingItems) {
 
             Log.i(LOG_TAG, "inside the onlisteitemstepclick mehtod  "+clickItemIndex);
-//            Intent intent1 = new Intent(FragmentRecipeSteps.this,BakingStepDescription.class);
-
+            stepSelectedListener.stepNumberSelected(clickItemIndex, bakingItems);
 
         }
     }
@@ -154,4 +168,9 @@ public class FragmentRecipeSteps extends Fragment {
 
         }
     }
+
+    public interface StepSelectedListener{
+         void stepNumberSelected(int clickItemIndex, BakingItems bakingItems);
+    }
+
 }

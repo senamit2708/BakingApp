@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,10 @@ import com.example.senamit.bakingapp.R;
 
 public class FragmentRecipeBakingProcess extends Fragment{
 
+    private static final String LOG_TAG = FragmentRecipeBakingProcess.class.getSimpleName();
     Context context;
     TextView text2;
+    int clickItemIndex;
 
 
     public FragmentRecipeBakingProcess() {
@@ -29,7 +32,17 @@ public class FragmentRecipeBakingProcess extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_baking_process, container, false);
         text2= rootView.findViewById(R.id.text2);
-        text2.setText("inside second fragment");
+        Log.i(LOG_TAG, "the clickeditem index is "+clickItemIndex);
+
+        text2.setText(Integer.toString(clickItemIndex));
+
         return  rootView;
+    }
+
+
+    public void setClickItemIndex(int clickItemIndex) {
+        this.clickItemIndex = clickItemIndex;
+        Log.i(LOG_TAG, "the clickeditem index setClickItemIndex is "+clickItemIndex);
+
     }
 }
