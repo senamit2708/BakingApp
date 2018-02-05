@@ -43,15 +43,11 @@ public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeSt
 
 
         String shortDescription = bakingItems.get(position).getShortDiscription();
-        Log.i(LOG_TAG, "the shortdescription in adapter is "+shortDescription);
         holder.txtRecipeStepShortDescription.setText(shortDescription);
-        String logdescription = holder.txtRecipeStepShortDescription.getText().toString();
-        Log.i(LOG_TAG, "the recipe description is "+ logdescription);
     }
 
     @Override
     public int getItemCount() {
-        Log.i(LOG_TAG, "the size of araay is in adapter is "+bakingItems.size());
         return bakingItems.size();
     }
 
@@ -67,7 +63,6 @@ public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeSt
 
         @Override
         public void onClick(View v) {
-            Log.i(LOG_TAG, "inside the onclick of viewholder");
             int clickItemPosition = getAdapterPosition();
             listItemStepClickListener.onListItemStepClick(clickItemPosition, bakingItems);
         }

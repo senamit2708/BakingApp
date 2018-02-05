@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.FrameLayout;
 
 import com.example.senamit.bakingapp.fragment.FragmentRecipeBakingProcess;
 import com.example.senamit.bakingapp.fragment.FragmentRecipeSteps;
@@ -20,8 +21,9 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
     FragmentManager manager;
     FragmentTransaction transaction;
     FragmentRecipeSteps fragmentRecipeSteps;
-    FragmentRecipeBakingProcess fragmentRecipeBakingProcess;
     String KEY_RECIPE_STEP_PROCESS="keyBakingProcess";
+    FragmentRecipeBakingProcess fragmentRecipeBakingProcess;
+    Boolean mTwoPane=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,28 +33,36 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
         Intent intent = getIntent();
         recipeId = intent.getIntExtra("recipeId", 0);
 
-        Log.i(LOG_TAG, "the receipe is id is  "+ recipeId);
-
          fragmentRecipeSteps = new FragmentRecipeSteps();
         fragmentRecipeSteps.setRecipeId(recipeId);
          manager = getSupportFragmentManager();
          transaction = manager.beginTransaction();
         transaction.add(R.id.frame_receipe_step_container, fragmentRecipeSteps).commit();
 
-         fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
-
-
+       if(findViewById(R.id.linear_two_pane_layout)!=null){
+           mTwoPane=true;
+           fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
+           getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();
+       }
     }
 
     @Override
     public void stepNumberSelected(int clickItemIndex, List<BakingItems> bakingItems) {
 
-        Intent intent = new Intent(BakingRecipeStep.this, BakingStepDescription.class);
-        ArrayList<BakingItems> bakingItemsArrayList;
-        bakingItemsArrayList = (ArrayList<BakingItems>) bakingItems;
-        intent.putParcelableArrayListExtra(KEY_RECIPE_STEP_PROCESS, bakingItemsArrayList);
-        intent.putExtra("key2", clickItemIndex);
-        startActivity(intent);
+        if (mTwoPane==false) {
+            Intent intent = new Intent(BakingRecipeStep.this, BakingStepDescription.class);
+            ArrayList<BakingItems> bakingItemsArrayList;
+            bakingItemsArrayList = (ArrayList<BakingItems>) bakingItems;
+            intent.putParcelableArrayListExtra(KEY_RECIPE_STEP_PROCESS, bakingItemsArrayList);
+            intent.putExtra("key2", clickItemIndex);
+            startActivity(intent);
+        }
+        else {
+            FragmentRecipeBakingProcess fragmentRecipeBakingProcess2 = new FragmentRecipeBakingProcess();
+            fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clickItemIndex).getDescription());
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();
+
+        }
 
 
     }

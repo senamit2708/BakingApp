@@ -25,7 +25,7 @@ public class BakingStepDescription extends AppCompatActivity {
     int stepCount;
 
     public static final String LOG_TAG = BakingStepDescription.class.getSimpleName();
-    FrameLayout frameLayoutBakingStepInstruction;
+//    FrameLayout frameLayoutBakingStepInstruction;
     FragmentRecipeBakingProcess fragmentRecipeBakingProcess;
 
     @Override
@@ -42,7 +42,7 @@ public class BakingStepDescription extends AppCompatActivity {
        clikedItemIndex = bundle.getInt("key2", 20);
        stepCount = bakingItems.size();
 
-         frameLayoutBakingStepInstruction = findViewById(R.id.frameLayoutRecipeStepInstruction);
+//         frameLayoutBakingStepInstruction = findViewById(R.id.frameLayoutRecipeStepInstruction);
          fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
          fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription());
         getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();

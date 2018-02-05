@@ -13,7 +13,7 @@ import java.util.List;
  * Created by senamit on 31/1/18.
  */
 
-public class fragmentRecipeStepLoader extends AsyncTaskLoader {
+public class fragmentRecipeStepLoader extends AsyncTaskLoader<List<BakingItems>> {
 
     private static final String LOG_TAG = fragmentRecipeStepLoader.class.getSimpleName();
 
@@ -36,17 +36,18 @@ public class fragmentRecipeStepLoader extends AsyncTaskLoader {
     protected void onStartLoading() {
 //        super.onStartLoading();
         if (bakingItems!=null){
-            return;
+        Log.i(LOG_TAG, "inside onstartloadeing not null area");
+            deliverResult(bakingItems);
         }
         else {
-            forceLoad();
+            Log.i(LOG_TAG, "inside the forceload section of onstartloading");
+            super.forceLoad();
         }
 
     }
 
     @Override
-    public Object loadInBackground() {
-//        return null;
+    public List<BakingItems> loadInBackground() {
         if (stringUrl==null){
             return null;
         }
@@ -58,11 +59,14 @@ public class fragmentRecipeStepLoader extends AsyncTaskLoader {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         return bakingItems;
+    }
 
-
+    @Override
+    public void deliverResult(List<BakingItems> data) {
+        bakingItems=data;
+        Log.i(LOG_TAG, "inside the deliverresult method");
+        super.deliverResult(data);
 
     }
 }

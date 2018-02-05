@@ -36,6 +36,7 @@ public class FragmentRecipeSteps extends Fragment {
     private RecyclerView recyclerRecipeStep;
     private RecyclerView.LayoutManager mLayoutManager;
     BakingRecipeStepAdapter bakingRecipeStepAdapter;
+    Bundle saveInstanceState;
     String stringUrl = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
     StepSelectedListener stepSelectedListener;
@@ -46,6 +47,7 @@ public class FragmentRecipeSteps extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.saveInstanceState= savedInstanceState;
 
 
     }
@@ -112,7 +114,7 @@ public class FragmentRecipeSteps extends Fragment {
         }
 
         public  void loadercall() {
-            getLoaderManager().initLoader(1, null, this);
+            getLoaderManager().initLoader(1, saveInstanceState, this);
 
         }
 

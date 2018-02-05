@@ -7,14 +7,13 @@ import android.util.Log;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by senamit on 24/1/18.
  */
 
-public class BakingRecipeNameLoader extends AsyncTaskLoader {
+public class BakingRecipeNameLoader extends AsyncTaskLoader<List<BakingItems>> {
 
     List<BakingItems> bakingItems;
     String stringUrl;
@@ -30,11 +29,13 @@ public class BakingRecipeNameLoader extends AsyncTaskLoader {
     @Override
     protected void onStartLoading() {
 //        super.onStartLoading();
+        Log.i(LOG_TAG, "inside on start loading method");
         forceLoad();
+
     }
 
     @Override
-    public Object loadInBackground() {
+    public List<BakingItems> loadInBackground() {
         if (stringUrl==null){
             return null;
         }

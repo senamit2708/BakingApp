@@ -27,29 +27,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        bakingItems = new ArrayList<>();
-//        bakingItems.add(new BakingItems("chicken", R.drawable.imagetest1));
-//
-//        bakingItems.add(new BakingItems("Biryani", R.drawable.imagetest1));
-
-
         recyclerRecipeName = findViewById(R.id.recyclerRecipeName);
         mLayoutManager = new GridLayoutManager(this, 1);
         recyclerRecipeName.setLayoutManager(mLayoutManager);
-
         Log.i(LOG_TAG, "inside on create");
-
-
         getSupportLoaderManager().initLoader(0, savedInstanceState, this);
-
-
-
 
     }
 
     @Override
     public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
-
         Log.i(LOG_TAG, "inside on create loader");
         return new BakingRecipeNameLoader(this,stringUrl );
     }

@@ -123,7 +123,6 @@ public class QueryUtils {
     }
 
     public static ArrayList<BakingItems> fetchRecipeName(String stringUrl) throws IOException, JSONException {
-        Log.i(LOG_TAG, "the fetchRecipename 1");
         URL url = createUrl(stringUrl);
         Log.i(LOG_TAG, "the url is2   " + url);
         String jsonResponse = null;
@@ -155,7 +154,7 @@ public class QueryUtils {
                 measure = jsonIngredientObject.optString("measure");
                 ingredient = jsonIngredientObject.optString("ingredient");
 
-                Log.i(LOG_TAG, "the ingredients are "+ ingredient);
+//                Log.i(LOG_TAG, "the ingredients are "+ ingredient);
                 bakingItems.add(new BakingItems(ingredient, quantity, measure));
 
             }
@@ -209,7 +208,7 @@ public class QueryUtils {
              videoURL = jsonStepObject.optString("videoURL");
             thumbnailURL=jsonStepObject.optString("thumbnailURL");
 
-            Log.i(LOG_TAG, "the short description "+stepShortDescription);
+//            Log.i(LOG_TAG, "the short description "+stepShortDescription);
             bakingItems.add(new BakingItems(stepShortDescription, stepId, description, thumbnailURL, videoURL));
         }
 
