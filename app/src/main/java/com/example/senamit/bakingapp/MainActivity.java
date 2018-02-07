@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -27,11 +28,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         recyclerRecipeName = findViewById(R.id.recyclerRecipeName);
         mLayoutManager = new GridLayoutManager(this, 1);
         recyclerRecipeName.setLayoutManager(mLayoutManager);
+
         Log.i(LOG_TAG, "inside on create");
-        getSupportLoaderManager().initLoader(0, savedInstanceState, this);
+//        getSupportLoaderManager().initLoader(0, savedInstanceState, this);
 
     }
 
