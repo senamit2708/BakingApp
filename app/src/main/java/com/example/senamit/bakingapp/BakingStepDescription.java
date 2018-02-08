@@ -49,10 +49,13 @@ public class BakingStepDescription extends AppCompatActivity {
        stepCount = bakingItems.size();
 
 //         frameLayoutBakingStepInstruction = findViewById(R.id.frameLayoutRecipeStepInstruction);
-         fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
-         fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription());
-        getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();
+        if (savedInstanceState==null){
 
+
+         fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
+         fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(), bakingItems.get(clikedItemIndex).getVideoURL());
+        getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();
+        }
         btnNextStepDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +68,7 @@ public class BakingStepDescription extends AppCompatActivity {
                     Log.i(LOG_TAG, "the clicked index before button click is " + clikedItemIndex);
                     clikedItemIndex++;
                     FragmentRecipeBakingProcess fragmentRecipeBakingProcess2 = new FragmentRecipeBakingProcess();
-                    fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription());
+                    fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(),bakingItems.get(clikedItemIndex).getVideoURL());
                     Log.i(LOG_TAG, "the value is " + bakingItems.get(clikedItemIndex).getDescription());
                     getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();
 
@@ -88,7 +91,7 @@ public class BakingStepDescription extends AppCompatActivity {
                 if (clikedItemIndex>0){
                 clikedItemIndex--;
                 FragmentRecipeBakingProcess fragmentRecipeBakingProcess2= new FragmentRecipeBakingProcess();
-                fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription());
+                fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(),bakingItems.get(clikedItemIndex).getVideoURL());
                 Log.i(LOG_TAG, "the value is "+bakingItems.get(clikedItemIndex).getDescription());
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();
 //                    btnNextStepDescription.setVisibility(View.VISIBLE);

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         recyclerRecipeName.setLayoutManager(mLayoutManager);
 
         Log.i(LOG_TAG, "inside on create");
-//        getSupportLoaderManager().initLoader(0, savedInstanceState, this);
+        getSupportLoaderManager().initLoader(0, savedInstanceState, this);
 
     }
 

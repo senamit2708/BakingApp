@@ -91,6 +91,14 @@ public class BakingItems implements Parcelable{
         return description;
     }
 
+    public String getThumbnailURL() {
+        return thumbnailURL;
+    }
+
+    public String getVideoURL() {
+        return videoURL;
+    }
+
     protected BakingItems(Parcel in) {
         recipeName = in.readString();
         recipeImage = in.readString();
