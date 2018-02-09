@@ -2,11 +2,9 @@ package com.example.senamit.bakingapp;
 
 import android.text.TextUtils;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +22,6 @@ import java.util.ArrayList;
 public class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
-
     public static ArrayList<BakingItems> bakingItems;
 
     public static URL createUrl(String stringUrl) throws MalformedURLException {
@@ -58,7 +55,7 @@ public class QueryUtils {
                 return null;
             }
         } catch (IOException e) {
-            Log.i(LOG_TAG, "the  connection is interuptrd " + e);
+            Log.e(LOG_TAG, "the  connection is interuptrd " + e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -94,7 +91,6 @@ public class QueryUtils {
         int recipeId;
 
         JSONArray baseJsonArray = null;
-
         ArrayList<BakingItems> bakingItems = new ArrayList<>();
         try{
              baseJsonArray = new JSONArray(jsonResponse);
@@ -104,12 +100,10 @@ public class QueryUtils {
         }
       
         for (int i=0; i<baseJsonArray.length(); i++){
-
             JSONObject jsonObject = baseJsonArray.optJSONObject(i);
             recipeName=jsonObject.optString("name");
             recipeImage = jsonObject.optString("image");
             recipeId = jsonObject.optInt("id");
-            Log.i(LOG_TAG, "the recipe id is "+recipeId);
 
             if (TextUtils.isEmpty(recipeImage)){
                 bakingItems.add(new BakingItems(recipeName, "no Image", recipeId));
@@ -119,7 +113,6 @@ public class QueryUtils {
             }
         }
         return bakingItems;
-
     }
 
     public static ArrayList<BakingItems> fetchRecipeName(String stringUrl) throws IOException, JSONException {

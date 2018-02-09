@@ -25,6 +25,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/cardTxtRecipeName"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:text="receipe name"/>
 
         </LinearLayout>

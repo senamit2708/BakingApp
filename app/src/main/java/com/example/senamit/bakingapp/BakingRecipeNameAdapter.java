@@ -46,8 +46,7 @@ public class BakingRecipeNameAdapter extends RecyclerView.Adapter<BakingRecipeNa
         String url= bakingItems.get(position).getRecipeImage();
 
         holder.cardTxtRecipeName.setText(bakingItems.get(position).getRecipeName());
-        Picasso.with(context).load(url).placeholder(R.drawable.testimage1).error(R.drawable.bakingimage1).into(holder.cardImageView);
-//      Picasso.with(context).load(R.drawable.imagetest1).placeholder(R.drawable.imagetest1).error(R.drawable.imagetest1).into(holder.cardImageView);
+        Picasso.with(context).load(url).placeholder(R.mipmap.cookies2).error(R.mipmap.cookies2).into(holder.cardImageView);
 
     }
 

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private RecyclerView.LayoutManager mLayoutManager;
     BakingRecipeNameAdapter mbakingRecipeNameAdapter;
     List<BakingItems> bakingItems;
+    private int recyclerNumColumn = 0;
     String stringUrl = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
     @Override
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setSupportActionBar(toolbar);
 
         recyclerRecipeName = findViewById(R.id.recyclerRecipeName);
-        mLayoutManager = new GridLayoutManager(this, 1);
+        recyclerNumColumn= getResources().getInteger(R.integer.recycler_num_columns);
+        mLayoutManager = new GridLayoutManager(this, recyclerNumColumn);
         recyclerRecipeName.setLayoutManager(mLayoutManager);
 
         Log.i(LOG_TAG, "inside on create");

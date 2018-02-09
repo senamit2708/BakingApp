@@ -45,11 +45,15 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
          transaction = manager.beginTransaction();
         transaction.add(R.id.frame_receipe_step_container, fragmentRecipeSteps).commit();
 
+
+
+
        if(findViewById(R.id.linear_two_pane_layout)!=null){
            mTwoPane=true;
            fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
            getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();
        }
+
     }
 
     @Override
@@ -65,6 +69,7 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
         }
         else {
             FragmentRecipeBakingProcess fragmentRecipeBakingProcess2 = new FragmentRecipeBakingProcess();
+            Log.i(LOG_TAG, "the video url is "+bakingItems.get(clickItemIndex).getVideoURL());
             fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clickItemIndex).getDescription(),bakingItems.get(clickItemIndex).getVideoURL());
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();
 

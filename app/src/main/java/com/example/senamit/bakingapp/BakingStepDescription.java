@@ -68,6 +68,7 @@ public class BakingStepDescription extends AppCompatActivity {
                     Log.i(LOG_TAG, "the clicked index before button click is " + clikedItemIndex);
                     clikedItemIndex++;
                     FragmentRecipeBakingProcess fragmentRecipeBakingProcess2 = new FragmentRecipeBakingProcess();
+                    Log.i(LOG_TAG, "the video url before sending is  "+bakingItems.get(clikedItemIndex).getVideoURL());
                     fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(),bakingItems.get(clikedItemIndex).getVideoURL());
                     Log.i(LOG_TAG, "the value is " + bakingItems.get(clikedItemIndex).getDescription());
                     getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();

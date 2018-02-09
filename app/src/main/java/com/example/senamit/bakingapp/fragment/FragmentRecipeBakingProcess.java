@@ -69,7 +69,7 @@ public class FragmentRecipeBakingProcess extends Fragment{
         return  rootView;
     }
 
-    private void exoPlayerSetup(String videoUrl, long seekbarPosition) {
+    private void exoPlayerSetup(String videoUrl) {
 
 //        Handler mainHandler = new Handler();
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -83,12 +83,17 @@ public class FragmentRecipeBakingProcess extends Fragment{
 
         DefaultBandwidthMeter defaultBandwidthMeter = new DefaultBandwidthMeter();
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(context, Util.getUserAgent(context,"exoplayertest"), defaultBandwidthMeter);
+        Log.i(LOG_TAG, "the video url is "+videoUrl);
+        if (TextUtils.isEmpty(videoUrl)){
+            return;
+        }
+
         Uri uri = Uri.parse(videoUrl);
         Log.i(LOG_TAG, "the uri is "+uri);
-        if (TextUtils.isEmpty(uri.toString())){
-            Log.i(LOG_TAG, "inside the second uri method");
-              uri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd97a_1-mix-marscapone-nutella-creampie/1-mix-marscapone-nutella-creampie.mp4");
-        }
+//        if (TextUtils.isEmpty(uri.toString())){
+//            Log.i(LOG_TAG, "inside the second uri method");
+//              uri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd97a_1-mix-marscapone-nutella-creampie/1-mix-marscapone-nutella-creampie.mp4");
+//        }
 
         Log.i(LOG_TAG, "the seekbar postion inside function is before loading "+ seekbarPosition);
 
@@ -124,7 +129,7 @@ public class FragmentRecipeBakingProcess extends Fragment{
         Log.i(LOG_TAG, "inisde onstart method and video url is "+videoUrl);
         Log.i(LOG_TAG, "inside onstart the postion of video is "+seekbarPosition);
         text2.setText(clickItemIndex);
-        exoPlayerSetup(videoUrl, seekbarPosition);
+        exoPlayerSetup(videoUrl);
         Log.i(LOG_TAG, "the test value is onStart"+test1);
     }
 
@@ -138,6 +143,7 @@ public class FragmentRecipeBakingProcess extends Fragment{
         this.clickItemIndex = clickItemIndex;
         this.videoUrl = videoUrl;
         Log.i(LOG_TAG, "the clickitemindext is "+this.clickItemIndex);
+        Log.i(LOG_TAG, "the video url in setclickitemindex is "+videoUrl);
     }
 
     @Override
