@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="isTable">true</bool>
+    <integer name="recycler_num_columns">2</integer>
+
+</resources>
