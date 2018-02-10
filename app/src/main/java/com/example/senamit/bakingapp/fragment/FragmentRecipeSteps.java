@@ -29,9 +29,9 @@ import java.util.List;
 public class FragmentRecipeSteps extends Fragment {
 
     public static final String LOG_TAG = FragmentRecipeSteps.class.getSimpleName();
- Context context;
-  TextView txtRecipeIngredient;
-  TextView txtRecipeStep;
+    Context context;
+    TextView txtRecipeIngredient;
+    TextView txtRecipeStep;
     int recipeId;
     private RecyclerView recyclerRecipeStep;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -48,8 +48,6 @@ public class FragmentRecipeSteps extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.saveInstanceState= savedInstanceState;
-
-
     }
 
     @Override
@@ -59,9 +57,8 @@ public class FragmentRecipeSteps extends Fragment {
             stepSelectedListener = (StepSelectedListener)context;
         }
         catch (Exception e){
-            Log.i(LOG_TAG, "the interface is not attached to the acitiviyt");
+            Log.e(LOG_TAG, "the interface is not attached to the acitiviyt");
         }
-
     }
 
     @Nullable
@@ -78,11 +75,8 @@ public class FragmentRecipeSteps extends Fragment {
 
          RecipeStepClass recipeStepClass = new RecipeStepClass();
          recipeStepClass.loadercall();
-
          RecipeIngredientClass recipeIngredientClass = new RecipeIngredientClass();
          recipeIngredientClass.loadercall();
-
-
 
         return  rootView;
     }
@@ -94,36 +88,29 @@ public class FragmentRecipeSteps extends Fragment {
 
     public  class RecipeStepClass implements LoaderManager.LoaderCallbacks<List<BakingItems>>, BakingRecipeStepAdapter.ListItemStepClickListener{
 
-
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
-
             return new fragmentRecipeStepLoader(context,stringUrl, recipeId );
         }
 
         @Override
         public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
-
             bakingRecipeStepAdapter = new BakingRecipeStepAdapter(data, this);
             recyclerRecipeStep.setAdapter(bakingRecipeStepAdapter);
         }
 
         @Override
         public void onLoaderReset(Loader<List<BakingItems>> loader) {
-
+            recyclerRecipeStep.setAdapter(null);
         }
 
         public  void loadercall() {
             getLoaderManager().initLoader(1, saveInstanceState, this);
-
         }
 
         @Override
         public void onListItemStepClick(int clickItemIndex, List<BakingItems> bakingItems) {
-
-            Log.i(LOG_TAG, "inside the onlisteitemstepclick mehtod  "+clickItemIndex);
             stepSelectedListener.stepNumberSelected(clickItemIndex, bakingItems);
-
         }
     }
 

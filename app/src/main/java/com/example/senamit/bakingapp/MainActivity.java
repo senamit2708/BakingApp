@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<BakingItems>>, BakingRecipeNameAdapter.ListItemClickListener {
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     BakingRecipeNameAdapter mbakingRecipeNameAdapter;
     List<BakingItems> bakingItems;
     private int recyclerNumColumn = 0;
+    private int LOADER_MANAGER_ID = 0;
     String stringUrl = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
     @Override
@@ -33,44 +33,35 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setSupportActionBar(toolbar);
 
         recyclerRecipeName = findViewById(R.id.recyclerRecipeName);
-        recyclerNumColumn= getResources().getInteger(R.integer.recycler_num_columns);
+        recyclerNumColumn = getResources().getInteger(R.integer.recycler_num_columns);
         mLayoutManager = new GridLayoutManager(this, recyclerNumColumn);
         recyclerRecipeName.setLayoutManager(mLayoutManager);
 
-        Log.i(LOG_TAG, "inside on create");
-        getSupportLoaderManager().initLoader(0, savedInstanceState, this);
+        getSupportLoaderManager().initLoader(LOADER_MANAGER_ID, savedInstanceState, this);
 
     }
 
     @Override
     public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
-        Log.i(LOG_TAG, "inside on create loader");
-        return new BakingRecipeNameLoader(this,stringUrl );
+        return new BakingRecipeNameLoader(this, stringUrl);
     }
 
     @Override
     public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
-        Log.i(LOG_TAG, "inisde on load finished");
-        mbakingRecipeNameAdapter= new BakingRecipeNameAdapter(data, this);
+        mbakingRecipeNameAdapter = new BakingRecipeNameAdapter(data, this);
         recyclerRecipeName.setAdapter(mbakingRecipeNameAdapter);
     }
 
     @Override
     public void onLoaderReset(Loader<List<BakingItems>> loader) {
-
         recyclerRecipeName.setAdapter(null);
     }
 
     @Override
     public void onListItemClick(int clickedItemIndex, BakingItems bakingItems) {
-
         Intent intent = new Intent(MainActivity.this, BakingRecipeStep.class);
-
         int recipeId = bakingItems.getRecipeId();
-        Log.i(LOG_TAG, "the reipe id is "+recipeId);
         intent.putExtra("recipeId", recipeId);
         startActivity(intent);
-
-
     }
 }

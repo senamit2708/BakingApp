@@ -14,7 +14,7 @@ import java.util.List;
  * Created by senamit on 2/2/18.
  */
 
-public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeStepAdapter.ViewHolder>{
+public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeStepAdapter.ViewHolder> {
 
     Context context;
     List<BakingItems> bakingItems;
@@ -51,7 +51,7 @@ public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeSt
         return bakingItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtRecipeStepShortDescription;
 
 
@@ -68,7 +68,7 @@ public class BakingRecipeStepAdapter extends RecyclerView.Adapter<BakingRecipeSt
         }
     }
 
-    public interface ListItemStepClickListener{
+    public interface ListItemStepClickListener {
         void onListItemStepClick(int clickItemIndex, List<BakingItems> bakingItems);
     }
 

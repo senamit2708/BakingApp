@@ -28,28 +28,21 @@ public class BakingRecipeNameLoader extends AsyncTaskLoader<List<BakingItems>> {
 
     @Override
     protected void onStartLoading() {
-//        super.onStartLoading();
-        Log.i(LOG_TAG, "inside on start loading method");
         forceLoad();
-
     }
 
     @Override
     public List<BakingItems> loadInBackground() {
-        if (stringUrl==null){
+        if (stringUrl == null) {
             return null;
         }
-
         try {
-            Log.i(LOG_TAG, "inside the load in backgroound");
             bakingItems = QueryUtils.fetchRecipeName(stringUrl);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         return bakingItems;
     }
 }

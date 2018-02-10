@@ -35,19 +35,17 @@ public class BakingRecipeNameAdapter extends RecyclerView.Adapter<BakingRecipeNa
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.baking_recipe_name_cardview, parent, false);
-      context=parent.getContext();
-       return new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.baking_recipe_name_cardview, parent, false);
+        context = parent.getContext();
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        String url= bakingItems.get(position).getRecipeImage();
-
+        String url = bakingItems.get(position).getRecipeImage();
         holder.cardTxtRecipeName.setText(bakingItems.get(position).getRecipeName());
         Picasso.with(context).load(url).placeholder(R.mipmap.cookies2).error(R.mipmap.cookies2).into(holder.cardImageView);
-
     }
 
     @Override
@@ -55,7 +53,7 @@ public class BakingRecipeNameAdapter extends RecyclerView.Adapter<BakingRecipeNa
         return bakingItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView cardTxtRecipeName;
         ImageView cardImageView;
@@ -70,15 +68,11 @@ public class BakingRecipeNameAdapter extends RecyclerView.Adapter<BakingRecipeNa
         @Override
         public void onClick(View view) {
             int clickedItemIndex = getAdapterPosition();
-            Log.i(LOG_TAG, "the clicked item index is "+clickedItemIndex);
-            Log.i(LOG_TAG, "the clicked item index is "+bakingItems.get(clickedItemIndex));
             onClickListener.onListItemClick(clickedItemIndex, bakingItems.get(clickedItemIndex));
         }
     }
 
     public interface ListItemClickListener {
-
         void onListItemClick(int clickedItemIndex, BakingItems bakingItems);
-
     }
 }

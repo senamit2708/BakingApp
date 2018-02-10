@@ -14,9 +14,9 @@ import java.util.List;
 
 public class FragmentRecipeIngredientLoader extends AsyncTaskLoader {
 
-    List<BakingItems> bakingItems;
-    int recipeId;
-    String stringUrl;
+    private List<BakingItems> bakingItems;
+    private int recipeId;
+    private String stringUrl;
 
     public FragmentRecipeIngredientLoader(Context context, int recipeId, String stringUrl) {
         super(context);
@@ -26,14 +26,11 @@ public class FragmentRecipeIngredientLoader extends AsyncTaskLoader {
 
     @Override
     protected void onStartLoading() {
-//        super.onStartLoading();
-        if (bakingItems!=null){
+        if (bakingItems != null) {
             return;
-        }
-        else {
+        } else {
             forceLoad();
         }
-
     }
 
     @Override

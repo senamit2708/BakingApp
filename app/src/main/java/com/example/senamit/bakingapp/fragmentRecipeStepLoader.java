@@ -16,10 +16,9 @@ import java.util.List;
 public class fragmentRecipeStepLoader extends AsyncTaskLoader<List<BakingItems>> {
 
     private static final String LOG_TAG = fragmentRecipeStepLoader.class.getSimpleName();
-
-    List<BakingItems> bakingItems;
-    int recipeId;
-    String stringUrl;
+    private List<BakingItems> bakingItems;
+    private int recipeId;
+    private String stringUrl;
 
     public fragmentRecipeStepLoader(Context context, String stringUrl) {
         super(context);
@@ -34,25 +33,19 @@ public class fragmentRecipeStepLoader extends AsyncTaskLoader<List<BakingItems>>
 
     @Override
     protected void onStartLoading() {
-//        super.onStartLoading();
-        if (bakingItems!=null){
-        Log.i(LOG_TAG, "inside onstartloadeing not null area");
+        if (bakingItems != null) {
             deliverResult(bakingItems);
-        }
-        else {
-            Log.i(LOG_TAG, "inside the forceload section of onstartloading");
+        } else {
             super.forceLoad();
         }
-
     }
 
     @Override
     public List<BakingItems> loadInBackground() {
-        if (stringUrl==null){
+        if (stringUrl == null) {
             return null;
         }
         try {
-            Log.i(LOG_TAG, "inside the load in backgroound");
             bakingItems = QueryUtils.fetchRecipeStep(stringUrl, recipeId);
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,9 +57,7 @@ public class fragmentRecipeStepLoader extends AsyncTaskLoader<List<BakingItems>>
 
     @Override
     public void deliverResult(List<BakingItems> data) {
-        bakingItems=data;
-        Log.i(LOG_TAG, "inside the deliverresult method");
+        bakingItems = data;
         super.deliverResult(data);
-
     }
 }
