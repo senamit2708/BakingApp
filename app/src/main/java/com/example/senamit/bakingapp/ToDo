@@ -25,4 +25,10 @@ https://developer.android.com/training/basics/fragments/index.html
 demo app of google newspaper
 
 
+@todo internet connection in main activity
+
+
+Main activity --> activity main layout -->BakingRecipeNameLoader -->BakingRecipeNameAdapter -->
+Main activity -->BakingRecipeStep
+
 

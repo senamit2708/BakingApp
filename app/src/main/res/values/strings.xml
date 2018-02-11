@@ -4,4 +4,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="internetMessage">NO internet Connection</string>
+    <string name="alertTitle">Internet</string>
+    <string name="alertButton">OK</string>
 </resources>

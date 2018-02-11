@@ -28,7 +28,14 @@ public class BakingRecipeNameLoader extends AsyncTaskLoader<List<BakingItems>> {
 
     @Override
     protected void onStartLoading() {
-        forceLoad();
+        if (bakingItems!=null){
+            Log.i(LOG_TAG, "inside not null of onstart loading");
+            return;
+        }
+        else {
+            forceLoad();
+        }
+
     }
 
     @Override
