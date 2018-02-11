@@ -56,11 +56,13 @@ public class FragmentRecipeBakingProcess extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_baking_process, container, false);
-        context = container.getContext();
+//        context = container.getContext();
         text2 = rootView.findViewById(R.id.text2);
         simpleExoPlayerView = rootView.findViewById(R.id.simpleExoPlayerView);
         return rootView;
     }
+
+
 
     private void exoPlayerSetup(String videoUrl) {
 
@@ -94,9 +96,12 @@ public class FragmentRecipeBakingProcess extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        context = getContext();
+
         if (savedInstanceState != null) {
             videoUrl = savedInstanceState.getString(SEEKBAR_POSITION);
             seekbarPosition = savedInstanceState.getLong(SELECTED_POSITION);
+            clickItemIndex=savedInstanceState.getString("key8", "no savedInstance");
         }
     }
 
@@ -134,7 +139,12 @@ public class FragmentRecipeBakingProcess extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putString(SEEKBAR_POSITION, videoUrl);
         outState.putLong(SELECTED_POSITION, seekbarPosition);
+        outState.putString("key8", clickItemIndex);
     }
 
+    @Override
+    public void setRetainInstance(boolean retain) {
+        super.setRetainInstance(retain);
 
+    }
 }

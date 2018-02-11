@@ -42,8 +42,9 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
         fragmentRecipeSteps = new FragmentRecipeSteps();
         fragmentRecipeSteps.setRecipeId(recipeId);
         manager = getSupportFragmentManager();
+        if (savedInstanceState==null){
         transaction = manager.beginTransaction();
-        transaction.add(R.id.frame_receipe_step_container, fragmentRecipeSteps).commit();
+        transaction.add(R.id.frame_receipe_step_container, fragmentRecipeSteps).commit();}
 
         if (findViewById(R.id.linear_two_pane_layout) != null) {
             mTwoPane = true;

@@ -31,4 +31,24 @@ demo app of google newspaper
 Main activity --> activity main layout -->BakingRecipeNameLoader -->BakingRecipeNameAdapter -->
 Main activity -->BakingRecipeStep
 
+BakingRecipeStep  --> activity_baking_recipe_step layout
+BakingRecipeStep  -->fragmentRecipeSteps,(fragment attached this one always)
+                  -->fragmentRecipeBakingProcess(if two pane layout,its also included into it and also for tablet)
+BakingRecipeStep   -->BakingStepDescription
+
+
+BakingStepDescription -->activity_baking_step_description layout
+                       --> FragmentRecipeBakingProcess
+                       -->buttons are used to move next and previous
+
+
+fragmentRecipeSteps -->fragment_recipe_step layout
+                    -->fragmentRecipeStepLoader(for step name)
+                    -->bakingRecipeStepAdapter
+
+                    -->FragmentRecipeIngredientLoader(for ingredient name)
+
+ fragmentRecipeBakingProcess -->   fragment_recipe_baking_process layout
+                            -->  exo player and description
+
 

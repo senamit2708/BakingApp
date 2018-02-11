@@ -31,7 +31,7 @@ public class FragmentRecipeSteps extends Fragment {
     public static final String LOG_TAG = FragmentRecipeSteps.class.getSimpleName();
     Context context;
     TextView txtRecipeIngredient;
-    TextView txtRecipeStep;
+//    TextView txtRecipeStep;
     int recipeId;
     private RecyclerView recyclerRecipeStep;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -65,10 +65,12 @@ public class FragmentRecipeSteps extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        Log.i(LOG_TAG, "inside on create view method");
+
         View rootView = inflater.inflate(R.layout.fragment_recipe_step, container, false);
         context=container.getContext();
          txtRecipeIngredient = (TextView)rootView.findViewById(R.id.txt_recipe_ingredients);
-         txtRecipeStep=(TextView)rootView.findViewById(R.id.txt_recipe_Step);
+//         txtRecipeStep=(TextView)rootView.findViewById(R.id.txt_recipe_Step);
          recyclerRecipeStep = rootView.findViewById(R.id.recyclerRecipeStep);
         mLayoutManager = new LinearLayoutManager(context);
         recyclerRecipeStep.setLayoutManager(mLayoutManager);
@@ -90,11 +92,13 @@ public class FragmentRecipeSteps extends Fragment {
 
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
+            Log.i(LOG_TAG, "inside oncreate loader setp");
             return new fragmentRecipeStepLoader(context,stringUrl, recipeId );
         }
 
         @Override
         public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
+            Log.i(LOG_TAG, "inside on load finsihed step");
             bakingRecipeStepAdapter = new BakingRecipeStepAdapter(data, this);
             recyclerRecipeStep.setAdapter(bakingRecipeStepAdapter);
         }
@@ -105,7 +109,7 @@ public class FragmentRecipeSteps extends Fragment {
         }
 
         public  void loadercall() {
-            getLoaderManager().initLoader(1, saveInstanceState, this);
+            getLoaderManager().initLoader(1, null, this);
         }
 
         @Override
@@ -118,28 +122,21 @@ public class FragmentRecipeSteps extends Fragment {
 
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
+            Log.i(LOG_TAG, "insidde on create laodfer ingredient");
             return new FragmentRecipeIngredientLoader(context, recipeId,stringUrl );
         }
 
         @Override
         public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
 
-            String ingredient;
-            int quantity;
-            String measure;
-            String displayIngredient = null;
-
+            Log.i(LOG_TAG, "inside on load finsihed");
             for (int i=0; i<data.size();i++){
-                ingredient = data.get(i).getIngredient();
-                quantity = data.get(i).getQuantity();
-                measure = data.get(i).getMeasure();
-
-                displayIngredient= quantity +", "+measure+", "+ingredient;
-
+              String  ingredient = data.get(i).getIngredient();
+              int quantity = data.get(i).getQuantity();
+              String  measure = data.get(i).getMeasure();
+              String displayIngredient= quantity +", "+measure+", "+ingredient;
+              txtRecipeIngredient.append("\n"+displayIngredient);
             }
-            txtRecipeIngredient.setText(displayIngredient);
-
-
         }
 
         @Override

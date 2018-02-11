@@ -34,6 +34,7 @@ public class fragmentRecipeStepLoader extends AsyncTaskLoader<List<BakingItems>>
     @Override
     protected void onStartLoading() {
         if (bakingItems != null) {
+            Log.i(LOG_TAG, "inside on start loading of step");
             deliverResult(bakingItems);
         } else {
             super.forceLoad();
@@ -58,6 +59,7 @@ public class fragmentRecipeStepLoader extends AsyncTaskLoader<List<BakingItems>>
     @Override
     public void deliverResult(List<BakingItems> data) {
         bakingItems = data;
+        Log.i(LOG_TAG, "inside deliver result method");
         super.deliverResult(data);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.senamit.bakingapp;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,13 +25,17 @@ public class BakingStepDescription extends AppCompatActivity {
     private int clikedItemIndex;
     private int stepCount;
 
+    int orientationId;
+    private final int LANDSCAPE=2;
+
     public static final String LOG_TAG = BakingStepDescription.class.getSimpleName();
     FragmentRecipeBakingProcess fragmentRecipeBakingProcess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_baking_step_description);
+        setContentView(R.layout.activity_baking_steps_description);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,6 +56,17 @@ public class BakingStepDescription extends AppCompatActivity {
             fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(), bakingItems.get(clikedItemIndex).getVideoURL());
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();
         }
+        orientationId=   getResources().getConfiguration().orientation;
+        if (orientationId==LANDSCAPE){
+            btnNextStepDescription.setVisibility(View.GONE);
+            btnPreviousStepDescription.setVisibility(View.GONE);
+        }
+        else {
+            btnNextStepDescription.setVisibility(View.VISIBLE);
+            btnPreviousStepDescription.setVisibility(View.VISIBLE);
+        }
+
+
         btnNextStepDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

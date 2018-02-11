@@ -27,7 +27,8 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" /></activity>
         <activity android:name=".BakingStepDescription"
-            android:parentActivityName=".BakingRecipeStep">
+            android:parentActivityName=".BakingRecipeStep"
+           >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BakingRecipeStep" /></activity>

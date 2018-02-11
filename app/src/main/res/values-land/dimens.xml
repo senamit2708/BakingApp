@@ -2,5 +2,6 @@
 <resources>
     <bool name="isTable">false</bool>
     <integer name="recycler_num_columns">1</integer>
+    <bool name="landscape">true</bool>
 
 </resources>
