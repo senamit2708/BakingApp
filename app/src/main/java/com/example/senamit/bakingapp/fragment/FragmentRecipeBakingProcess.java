@@ -48,6 +48,7 @@ public class FragmentRecipeBakingProcess extends Fragment {
     long seekbarPosition;
     SimpleExoPlayerView simpleExoPlayerView;
     SimpleExoPlayer player;
+    int orientationId;
 
     public FragmentRecipeBakingProcess() {
     }
@@ -60,6 +61,7 @@ public class FragmentRecipeBakingProcess extends Fragment {
         text2 = rootView.findViewById(R.id.text2);
         simpleExoPlayerView = rootView.findViewById(R.id.simpleExoPlayerView);
         return rootView;
+
     }
 
 
@@ -108,7 +110,13 @@ public class FragmentRecipeBakingProcess extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        text2.setText(clickItemIndex);
+       orientationId =  getResources().getConfiguration().orientation;
+       if (orientationId==2){
+           text2.setVisibility(View.GONE);
+       }else {
+           text2.setText(clickItemIndex);
+       }
+
         exoPlayerSetup(videoUrl);
     }
 
