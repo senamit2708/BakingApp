@@ -65,7 +65,6 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
             startActivity(intent);
         } else {
             FragmentRecipeBakingProcess fragmentRecipeBakingProcess2 = new FragmentRecipeBakingProcess();
-            Log.i(LOG_TAG, "the video url is " + bakingItems.get(clickItemIndex).getVideoURL());
             fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clickItemIndex).getDescription(), bakingItems.get(clickItemIndex).getVideoURL());
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();
         }

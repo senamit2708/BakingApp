@@ -22,7 +22,6 @@ public class BakingRecipeNameLoader extends AsyncTaskLoader<List<BakingItems>> {
 
     public BakingRecipeNameLoader(Context context, String stringUrl) {
         super(context);
-        Log.i(LOG_TAG, "inside the constructor");
         this.stringUrl = stringUrl;
     }
 

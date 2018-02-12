@@ -32,7 +32,6 @@ public class QueryUtils {
         }
         URL url = null;
         url = new URL(stringUrl);
-        Log.i(LOG_TAG, "the url is "+url);
         return url;
     }
 

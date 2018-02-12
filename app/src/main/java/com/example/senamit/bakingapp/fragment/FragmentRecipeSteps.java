@@ -31,7 +31,6 @@ public class FragmentRecipeSteps extends Fragment {
     public static final String LOG_TAG = FragmentRecipeSteps.class.getSimpleName();
     Context context;
     TextView txtRecipeIngredient;
-//    TextView txtRecipeStep;
     int recipeId;
     private RecyclerView recyclerRecipeStep;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -92,13 +91,11 @@ public class FragmentRecipeSteps extends Fragment {
 
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
-            Log.i(LOG_TAG, "inside oncreate loader setp");
             return new fragmentRecipeStepLoader(context,stringUrl, recipeId );
         }
 
         @Override
         public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
-            Log.i(LOG_TAG, "inside on load finsihed step");
             bakingRecipeStepAdapter = new BakingRecipeStepAdapter(data, this);
             recyclerRecipeStep.setAdapter(bakingRecipeStepAdapter);
         }
@@ -122,14 +119,12 @@ public class FragmentRecipeSteps extends Fragment {
 
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
-            Log.i(LOG_TAG, "insidde on create laodfer ingredient");
             return new FragmentRecipeIngredientLoader(context, recipeId,stringUrl );
         }
 
         @Override
         public void onLoadFinished(Loader<List<BakingItems>> loader, List<BakingItems> data) {
 
-            Log.i(LOG_TAG, "inside on load finsihed");
             for (int i=0; i<data.size();i++){
               String  ingredient = data.get(i).getIngredient();
               int quantity = data.get(i).getQuantity();
@@ -145,7 +140,6 @@ public class FragmentRecipeSteps extends Fragment {
         }
 
         public  void loadercall() {
-            Log.i(LOG_TAG, "inside the inner class");
             getLoaderManager().initLoader(2, null, this);
 
         }

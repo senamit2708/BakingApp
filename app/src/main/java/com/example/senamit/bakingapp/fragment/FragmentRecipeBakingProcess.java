@@ -77,7 +77,6 @@ public class FragmentRecipeBakingProcess extends Fragment {
             return;
         }
         Uri uri = Uri.parse(videoUrl);
-        Log.i(LOG_TAG, "the uri is " + uri);
 
 
         MediaSource mediaSource = new ExtractorMediaSource(uri, dataSourceFactory,

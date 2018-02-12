@@ -37,22 +37,18 @@ public class MainActivity extends AppCompatActivity implements  BakingRecipeName
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i(LOG_TAG, "inside on create method");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
         if (amIConnected()){
-            Log.i("connectionCheck", "user is connected");
             setupRecyclerView();
         }
     }
 
     private boolean amIConnected() {
-        //its asking about internet connection is available or not
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        //its asking about network is available or not
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 
         return activeNetworkInfo!=null && activeNetworkInfo.isConnected();
@@ -61,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements  BakingRecipeName
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-//        MenuItem refreshItem = menu.findItem(R.id.refresh);
         return true;
     }
 
