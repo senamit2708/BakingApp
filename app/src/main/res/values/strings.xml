@@ -7,4 +7,6 @@
     <string name="internetMessage">NO internet Connection</string>
     <string name="alertTitle">Internet</string>
     <string name="alertButton">OK</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

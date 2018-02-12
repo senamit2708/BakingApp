@@ -57,14 +57,10 @@ public class FragmentRecipeBakingProcess extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_baking_process, container, false);
-//        context = container.getContext();
         text2 = rootView.findViewById(R.id.text2);
         simpleExoPlayerView = rootView.findViewById(R.id.simpleExoPlayerView);
         return rootView;
-
     }
-
-
 
     private void exoPlayerSetup(String videoUrl) {
 
@@ -82,9 +78,7 @@ public class FragmentRecipeBakingProcess extends Fragment {
         }
         Uri uri = Uri.parse(videoUrl);
         Log.i(LOG_TAG, "the uri is " + uri);
-//        if (TextUtils.isEmpty(uri.toString())){
-//            Log.i(LOG_TAG, "inside the second uri method");
-//        }
+
 
         MediaSource mediaSource = new ExtractorMediaSource(uri, dataSourceFactory,
                 new DefaultExtractorsFactory(), null, null);
@@ -97,7 +91,6 @@ public class FragmentRecipeBakingProcess extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         context = getContext();
 
         if (savedInstanceState != null) {
@@ -116,7 +109,6 @@ public class FragmentRecipeBakingProcess extends Fragment {
        }else {
            text2.setText(clickItemIndex);
        }
-
         exoPlayerSetup(videoUrl);
     }
 
@@ -139,7 +131,6 @@ public class FragmentRecipeBakingProcess extends Fragment {
             player.release();
             player = null;
         }
-
     }
 
     @Override
