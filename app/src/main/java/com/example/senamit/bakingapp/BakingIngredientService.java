@@ -24,7 +24,6 @@ public class BakingIngredientService extends IntentService {
     public static final String UPDATE_RECIPE_INGREDIENTS = "com.example.senamit.action.updateRecipeIngredient";
     public BakingIngredientService() {
         super("BakingIngredientService");
-        Log.i(LOG_TAG, "inside the constructor of widget");
     }
 
 
@@ -45,7 +44,6 @@ public class BakingIngredientService extends IntentService {
         if (intent!=null){
             final  String action = intent.getAction();
             if (UPDATE_RECIPE_INGREDIENTS.equals(action)){
-                Log.i(LOG_TAG, "inside on handle intent function ");
               String widgetIngredient=  intent.getStringExtra(widgetUdateKey);
                 handleUpdateRecipeIngredientWidget(widgetIngredient);
             }
@@ -54,7 +52,6 @@ public class BakingIngredientService extends IntentService {
     }
 
     private void handleUpdateRecipeIngredientWidget(String widgetIngredient) {
-
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, BakingAppWidget.class));

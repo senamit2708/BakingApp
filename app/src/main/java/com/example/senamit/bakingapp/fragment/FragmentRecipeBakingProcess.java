@@ -108,12 +108,19 @@ public class FragmentRecipeBakingProcess extends Fragment {
        }else {
            text2.setText(clickItemIndex);
        }
-        exoPlayerSetup(videoUrl);
+
+       if (Util.SDK_INT>23){
+           exoPlayerSetup(videoUrl);
+       }
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if (Util.SDK_INT<=23|| player==null){
+            exoPlayerSetup(videoUrl);
+        }
     }
 
     public void setClickItemIndex(String clickItemIndex, String videoUrl) {
@@ -124,11 +131,27 @@ public class FragmentRecipeBakingProcess extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (player != null) {
-            seekbarPosition = player.getCurrentPosition();
-            player.stop();
-            player.release();
-            player = null;
+        if (Util.SDK_INT<=23){
+            if (player != null) {
+                seekbarPosition = player.getCurrentPosition();
+                player.stop();
+                player.release();
+                player = null;
+            }
+        }
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT>23){
+            if (player != null) {
+                seekbarPosition = player.getCurrentPosition();
+                player.stop();
+                player.release();
+                player = null;
+            }
         }
     }
 

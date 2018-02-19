@@ -65,12 +65,9 @@ public class FragmentRecipeSteps extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        Log.i(LOG_TAG, "inside on create view method");
-
         View rootView = inflater.inflate(R.layout.fragment_recipe_step, container, false);
         context=container.getContext();
          txtRecipeIngredient = (TextView)rootView.findViewById(R.id.txt_recipe_ingredients);
-//         txtRecipeStep=(TextView)rootView.findViewById(R.id.txt_recipe_Step);
          recyclerRecipeStep = rootView.findViewById(R.id.recyclerRecipeStep);
         mLayoutManager = new LinearLayoutManager(context);
         recyclerRecipeStep.setLayoutManager(mLayoutManager);
@@ -134,7 +131,6 @@ public class FragmentRecipeSteps extends Fragment {
               txtRecipeIngredient.append("\n"+displayIngredient);
             }
             String widgetIngredient = txtRecipeIngredient.getText().toString();
-            Log.i(LOG_TAG, "the widget ingredient is "+widgetIngredient);
             BakingIngredientService.startActionUpdatebakingWidget(getContext(), widgetIngredient);
         }
 
