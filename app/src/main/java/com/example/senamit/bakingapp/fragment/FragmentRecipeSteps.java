@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.senamit.bakingapp.BakingIngredientService;
 import com.example.senamit.bakingapp.BakingItems;
 import com.example.senamit.bakingapp.BakingRecipeStepAdapter;
 import com.example.senamit.bakingapp.FragmentRecipeIngredientLoader;
@@ -132,6 +133,9 @@ public class FragmentRecipeSteps extends Fragment {
               String displayIngredient= quantity +", "+measure+", "+ingredient;
               txtRecipeIngredient.append("\n"+displayIngredient);
             }
+            String widgetIngredient = txtRecipeIngredient.getText().toString();
+            Log.i(LOG_TAG, "the widget ingredient is "+widgetIngredient);
+            BakingIngredientService.startActionUpdatebakingWidget(getContext(), widgetIngredient);
         }
 
         @Override

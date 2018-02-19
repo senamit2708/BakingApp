@@ -12,7 +12,9 @@ import android.widget.RemoteViews;
  */
 public class BakingAppWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+    public static final String appName = "Baking App";
+
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,String name,
                                 int appWidgetId) {
 
 
@@ -20,17 +22,29 @@ public class BakingAppWidget extends AppWidgetProvider {
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0, intent, 0);
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.baking_app_widget);
+
+       views.setTextViewText(R.id.appwidget_text,name);
+
+        views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
         views.setOnClickPendingIntent(R.id.widget_image_icon, pendingIntent);
+
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
-        }
+       BakingIngredientService.startActionUpdatebakingWidget(context, appName);
     }
+
+
+    public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,String name,  int[] appWidgetIds){
+        for (int appWidgetId : appWidgetIds) {
+            updateAppWidget(context, appWidgetManager,name, appWidgetId);
+        }
+
+    }
+
 
     @Override
     public void onEnabled(Context context) {

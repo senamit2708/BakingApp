@@ -1,26 +1,30 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#09C"
-    android:padding="@dimen/widget_margin">
+    android:padding="@dimen/widget_margin"
+    android:orientation="horizontal"
+    android:weightSum="3">
 
-    <!--<TextView-->
-        <!--android:id="@+id/appwidget_text"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_margin="8dp"-->
-        <!--android:background="#09C"-->
-        <!--android:contentDescription="@string/appwidget_text"-->
-        <!--android:text="@string/appwidget_text"-->
-        <!--android:textColor="#ffffff"-->
-        <!--android:textSize="24sp"-->
-        <!--android:textStyle="bold|italic" />-->
+    <TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:background="#09C"
+        android:contentDescription="@string/appwidget_text"
+        android:text="@string/appwidget_text"
+        android:textColor="#ffffff"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:layout_weight="2"/>
   <ImageView
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="match_parent"
       android:src="@drawable/bakingimage1"
-      android:id="@+id/widget_image_icon"/>
+      android:id="@+id/widget_image_icon"
+      android:layout_weight="1"/>
 
-</RelativeLayout>
+</LinearLayout>
