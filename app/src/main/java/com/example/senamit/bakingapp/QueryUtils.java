@@ -177,7 +177,7 @@ public class QueryUtils {
         ArrayList<BakingItems> bakingItems = new ArrayList<>();
         baseJsonArray = new JSONArray(jsonResponse);
         JSONObject jsonObject = baseJsonArray.optJSONObject(arrayIndex);
-        JSONArray jsonIngredientArray = jsonObject.optJSONArray("ingredients");
+//        JSONArray jsonIngredientArray = jsonObject.optJSONArray("ingredients");
         JSONArray jsonStepArray = jsonObject.optJSONArray("steps");
         for (int i = 0; i < jsonStepArray.length(); i++) {
             JSONObject jsonStepObject = jsonStepArray.optJSONObject(i);

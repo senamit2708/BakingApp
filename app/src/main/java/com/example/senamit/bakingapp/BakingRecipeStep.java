@@ -37,7 +37,7 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
-        recipeId = intent.getIntExtra("recipeId", 0);
+        recipeId = intent.getIntExtra("recipeId", 1);
 
         fragmentRecipeSteps = new FragmentRecipeSteps();
         fragmentRecipeSteps.setRecipeId(recipeId);
@@ -65,7 +65,7 @@ public class BakingRecipeStep extends AppCompatActivity implements FragmentRecip
             startActivity(intent);
         } else {
             FragmentRecipeBakingProcess fragmentRecipeBakingProcess2 = new FragmentRecipeBakingProcess();
-            fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clickItemIndex).getDescription(), bakingItems.get(clickItemIndex).getVideoURL());
+            fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clickItemIndex).getDescription(), bakingItems.get(clickItemIndex).getVideoURL(), bakingItems.get(clickItemIndex).getThumbnailURL());
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();
         }
     }

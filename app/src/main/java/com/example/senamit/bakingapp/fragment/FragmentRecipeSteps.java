@@ -89,6 +89,7 @@ public class FragmentRecipeSteps extends Fragment {
 
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
+            Log.i(LOG_TAG, "the string url of recipe is "+stringUrl);
             return new fragmentRecipeStepLoader(context,stringUrl, recipeId );
         }
 
@@ -117,6 +118,7 @@ public class FragmentRecipeSteps extends Fragment {
 
         @Override
         public Loader<List<BakingItems>> onCreateLoader(int id, Bundle args) {
+            Log.i(LOG_TAG, "the string url of recipe is "+stringUrl);
             return new FragmentRecipeIngredientLoader(context, recipeId,stringUrl );
         }
 

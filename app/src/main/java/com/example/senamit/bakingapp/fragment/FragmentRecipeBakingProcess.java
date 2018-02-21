@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.senamit.bakingapp.R;
@@ -31,6 +32,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by senamit on 3/2/18.
@@ -41,10 +43,14 @@ public class FragmentRecipeBakingProcess extends Fragment {
     private static final String LOG_TAG = FragmentRecipeBakingProcess.class.getSimpleName();
     private static final String SELECTED_POSITION = "selectedPosition";
     private static final String SEEKBAR_POSITION = "seekbarPosition";
+    private static final String CLICKEDITEMKEY="key8";
+    private static final String IMAGEURLKEY="KEY9";
     Context context;
     TextView text2;
+    ImageView imgvwRecipeImage;
     String clickItemIndex;
     String videoUrl;
+    String imageUrl;
     long seekbarPosition;
     SimpleExoPlayerView simpleExoPlayerView;
     SimpleExoPlayer player;
@@ -58,6 +64,8 @@ public class FragmentRecipeBakingProcess extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_baking_process, container, false);
         text2 = rootView.findViewById(R.id.text2);
+        imgvwRecipeImage = rootView.findViewById(R.id.imgvwRecipeImage);
+        imgvwRecipeImage.setVisibility(View.GONE);
         simpleExoPlayerView = rootView.findViewById(R.id.simpleExoPlayerView);
         return rootView;
     }
@@ -95,7 +103,8 @@ public class FragmentRecipeBakingProcess extends Fragment {
         if (savedInstanceState != null) {
             videoUrl = savedInstanceState.getString(SEEKBAR_POSITION);
             seekbarPosition = savedInstanceState.getLong(SELECTED_POSITION);
-            clickItemIndex=savedInstanceState.getString("key8", "no savedInstance");
+            clickItemIndex=savedInstanceState.getString(CLICKEDITEMKEY, "no savedInstance");
+            imageUrl = savedInstanceState.getString(IMAGEURLKEY, "no savedInstance");
         }
     }
 
@@ -105,8 +114,16 @@ public class FragmentRecipeBakingProcess extends Fragment {
        orientationId =  getResources().getConfiguration().orientation;
        if (orientationId==2){
            text2.setVisibility(View.GONE);
+           imgvwRecipeImage.setVisibility(View.GONE);
        }else {
            text2.setText(clickItemIndex);
+           if (TextUtils.isEmpty(imageUrl)) {
+//               imgvwRecipeImage.setVisibility(View.VISIBLE);
+//               Picasso.with(context).load(imageUrl).placeholder(R.mipmap.cookies2).error(R.mipmap.cookies2).into(imgvwRecipeImage);
+           }else {
+               imgvwRecipeImage.setVisibility(View.VISIBLE);
+               Picasso.with(context).load(imageUrl).placeholder(R.mipmap.cookies2).error(R.mipmap.cookies2).into(imgvwRecipeImage);
+           }
        }
 
        if (Util.SDK_INT>23){
@@ -123,9 +140,10 @@ public class FragmentRecipeBakingProcess extends Fragment {
         }
     }
 
-    public void setClickItemIndex(String clickItemIndex, String videoUrl) {
+    public void setClickItemIndex(String clickItemIndex, String videoUrl, String imageUrl) {
         this.clickItemIndex = clickItemIndex;
         this.videoUrl = videoUrl;
+        this.imageUrl=imageUrl;
     }
 
     @Override
@@ -160,7 +178,8 @@ public class FragmentRecipeBakingProcess extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putString(SEEKBAR_POSITION, videoUrl);
         outState.putLong(SELECTED_POSITION, seekbarPosition);
-        outState.putString("key8", clickItemIndex);
+        outState.putString(CLICKEDITEMKEY, clickItemIndex);
+        outState.putString(IMAGEURLKEY, imageUrl);
     }
 
     @Override

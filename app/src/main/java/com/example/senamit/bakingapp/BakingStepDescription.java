@@ -53,7 +53,7 @@ public class BakingStepDescription extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             fragmentRecipeBakingProcess = new FragmentRecipeBakingProcess();
-            fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(), bakingItems.get(clikedItemIndex).getVideoURL());
+            fragmentRecipeBakingProcess.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(), bakingItems.get(clikedItemIndex).getVideoURL(), bakingItems.get(clikedItemIndex).getThumbnailURL());
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess).commit();
         }
         orientationId=   getResources().getConfiguration().orientation;
@@ -77,7 +77,7 @@ public class BakingStepDescription extends AppCompatActivity {
                 if (clikedItemIndex < stepCount - 1) {
                     clikedItemIndex++;
                     FragmentRecipeBakingProcess fragmentRecipeBakingProcess2 = new FragmentRecipeBakingProcess();
-                    fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(), bakingItems.get(clikedItemIndex).getVideoURL());
+                    fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(), bakingItems.get(clikedItemIndex).getVideoURL(), bakingItems.get(clikedItemIndex).getThumbnailURL());
                     getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();
                 } else {
                     btnNextStepDescription.setVisibility(View.INVISIBLE);
@@ -96,7 +96,7 @@ public class BakingStepDescription extends AppCompatActivity {
                 if (clikedItemIndex > 0) {
                     clikedItemIndex--;
                     FragmentRecipeBakingProcess fragmentRecipeBakingProcess2 = new FragmentRecipeBakingProcess();
-                    fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(), bakingItems.get(clikedItemIndex).getVideoURL());
+                    fragmentRecipeBakingProcess2.setClickItemIndex(bakingItems.get(clikedItemIndex).getDescription(), bakingItems.get(clikedItemIndex).getVideoURL(), bakingItems.get(clikedItemIndex).getThumbnailURL());
                     getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutRecipeStepInstruction, fragmentRecipeBakingProcess2).commit();
                     Log.i(LOG_TAG, "the clicked index is " + clikedItemIndex);
                 } else {
