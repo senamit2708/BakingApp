@@ -118,8 +118,7 @@ public class FragmentRecipeBakingProcess extends Fragment {
        }else {
            text2.setText(clickItemIndex);
            if (TextUtils.isEmpty(imageUrl)) {
-//               imgvwRecipeImage.setVisibility(View.VISIBLE);
-//               Picasso.with(context).load(imageUrl).placeholder(R.mipmap.cookies2).error(R.mipmap.cookies2).into(imgvwRecipeImage);
+               imgvwRecipeImage.setVisibility(View.GONE);
            }else {
                imgvwRecipeImage.setVisibility(View.VISIBLE);
                Picasso.with(context).load(imageUrl).placeholder(R.mipmap.cookies2).error(R.mipmap.cookies2).into(imgvwRecipeImage);
