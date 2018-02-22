@@ -145,12 +145,19 @@ public class FragmentRecipeBakingProcess extends Fragment {
         this.imageUrl=imageUrl;
     }
 
+    private void savePlayerState(){
+        if (player!=null){
+            seekbarPosition = player.getCurrentPosition();
+        }
+    }
+
+
     @Override
     public void onPause() {
         super.onPause();
+        savePlayerState();
         if (Util.SDK_INT<=23){
             if (player != null) {
-                seekbarPosition = player.getCurrentPosition();
                 player.stop();
                 player.release();
                 player = null;
@@ -162,9 +169,9 @@ public class FragmentRecipeBakingProcess extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        savePlayerState();
         if (Util.SDK_INT>23){
             if (player != null) {
-                seekbarPosition = player.getCurrentPosition();
                 player.stop();
                 player.release();
                 player = null;
